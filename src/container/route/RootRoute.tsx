@@ -1,10 +1,11 @@
-import React, { useState } from 'react';
-import type { MenuProps } from 'antd';
-import { Layout, Menu, theme } from 'antd';
+import { useState } from 'react';
+import { Layout, Menu } from 'antd';
 import { Outlet, Link } from 'react-router-dom';
 import HeaderDetail from '../shared/HeaderDetail';
 
 import { DesktopOutlined, AppstoreOutlined } from '@ant-design/icons';
+
+import ThemeApp from '../theme/ThemeApp';
 
 const { Header, Content, Footer, Sider } = Layout;
 
@@ -15,7 +16,8 @@ const LogoSider = () => {
         height: '64px',
         display: 'flex',
         justifyContent: 'center',
-        alignItems: 'center'
+        alignItems: 'center',
+        color: 'black'
       }}
     >
       <div style={{
@@ -34,7 +36,7 @@ const LogoSider = () => {
 
 const MenuSider = () => {
   return(
-    <Menu defaultSelectedKeys={['1']} mode="inline" theme='light' >
+    <Menu defaultSelectedKeys={['1']} mode="inline" theme={ThemeApp()?.menu} >
       <Menu.Item key='1' icon={<DesktopOutlined />}>
         <Link to="/overview"> Overview </Link>
       </Menu.Item>
@@ -47,9 +49,9 @@ const MenuSider = () => {
 
 const RootRoute = () => {
   const [collapsed, setCollapsed] = useState(false);
-  const {
-    token: { colorBgContainer },
-  } = theme.useToken();
+  // const {
+  //   token: { colorBgContainer },
+  // } = theme.useToken();
 
   return (
     <Layout style={{ minHeight: '100vh' }}>
@@ -58,18 +60,22 @@ const RootRoute = () => {
         collapsible 
         collapsed={collapsed} 
         onCollapse={(value) => setCollapsed(value)} 
-        theme='light'
+        theme={ThemeApp()?.sider}
         style={{
           boxShadow: 'rgba(0, 0, 0, 0.05) 0px 0px 5px 0px, rgba(0, 0, 0, 0.08) 0px 0px 0px 1px'
         }}
       >
         <LogoSider />
         <MenuSider />
+
       </Sider>
 
-      <Layout>
-        <Header style={{background: colorBgContainer, padding: 0 }}>
-          <HeaderDetail/>
+      <Layout style={{backgroundColor: ThemeApp()?.content}}>
+        <Header style={{padding: 0 }}>
+          <HeaderDetail 
+            bgColor={ThemeApp()?.header.bgColor}
+            textColor={ThemeApp()?.header.textColor}
+          />
         </Header>
 
         <Content style={{ margin: '20px' }}>
@@ -78,7 +84,7 @@ const RootRoute = () => {
           </div>
         </Content>
 
-        <Footer style={{ textAlign: 'center' }}>Ant Design ©2023 Created by Ant UED</Footer>
+        <Footer style={{ textAlign: 'center', backgroundColor: ThemeApp()?.content }}>Ant Design ©2023 Created by Ant UED</Footer>
 
       </Layout>
 

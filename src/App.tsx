@@ -1,13 +1,17 @@
 import { Suspense } from 'react';
 import { RouterProvider } from "react-router-dom";
-import rootRouter from "./components/route/router.config";
+import rootRouter from "./container/route/router.config";
+import store from "./redux/store/store";
+import { Provider } from 'react-redux';
 
 function App() {
   return (
     <div className="App">
-      <Suspense>
-        <RouterProvider router={rootRouter} />
-      </Suspense>
+      <Provider store={store}>
+        <Suspense>
+          <RouterProvider router={rootRouter} />
+        </Suspense>
+      </Provider>   
     </div>
   );
 }
