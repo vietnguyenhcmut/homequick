@@ -67,7 +67,6 @@ const RootRoute = () => {
       >
         <LogoSider />
         <MenuSider />
-
       </Sider>
 
       <Layout style={{backgroundColor: ThemeApp()?.content}}>
@@ -93,12 +92,3 @@ const RootRoute = () => {
 };
 
 export default RootRoute;
-
-
-// const RootRoute = () => {
-//   return(
-//     <div className="root-route">
-
-//     </div>
-//   )
-// }
